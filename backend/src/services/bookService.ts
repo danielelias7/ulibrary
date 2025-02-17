@@ -12,17 +12,17 @@ export const addBook = async (title: string, author: string, publishedYear: numb
 };
 
 export const getBooks = async (query: any): Promise<IBook[]> => {
-    const filters: any = {};
-    if (query.title) {
-      filters.title = { $regex: query.title, $options: 'i' };
-    }
-    if (query.author) {
-      filters.author = { $regex: query.author, $options: 'i' };
-    }
-    if (query.genre) {
-      filters.genre = { $regex: query.genre, $options: 'i' };
-    }
-    return await Book.find(filters);
+  const filters: any = {};
+  if (query.title) {
+    filters.title = { $regex: query.title, $options: 'i' };
+  }
+  if (query.author) {
+    filters.author = { $regex: query.author, $options: 'i' };
+  }
+  if (query.genre) {
+    filters.genre = { $regex: query.genre, $options: 'i' };
+  }
+  return await Book.find(filters);
 };
 
 export const getBookById = async (id: string): Promise<IBook | null> => {

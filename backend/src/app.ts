@@ -2,6 +2,7 @@ import express, { Application } from 'express';
 import connectDB from './config/db';
 import authRoutes from './routes/authRoutes';
 import bookRoutes from './routes/bookRoutes';
+import loanRoutes from './routes/loanRoutes';
 import * as dotenv from 'dotenv';
 import * as crypto from 'crypto';
 dotenv.config();
@@ -21,6 +22,7 @@ app.use(express.json()); // Enable parsing JSON request bodies
 
 app.use('/api/auth', authRoutes);
 app.use('/api/books', bookRoutes);
+app.use('/api/loans', loanRoutes);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
