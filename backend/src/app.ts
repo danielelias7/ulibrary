@@ -1,6 +1,7 @@
 import express, { Application } from 'express';
 import connectDB from './config/db';
 import authRoutes from './routes/authRoutes';
+import bookRoutes from './routes/bookRoutes';
 import * as dotenv from 'dotenv';
 import * as crypto from 'crypto';
 dotenv.config();
@@ -19,6 +20,7 @@ connectDB(); // Connect to MongoDB
 app.use(express.json()); // Enable parsing JSON request bodies
 
 app.use('/api/auth', authRoutes);
+app.use('/api/books', bookRoutes);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
