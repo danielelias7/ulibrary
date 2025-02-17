@@ -12,3 +12,7 @@ const createUserController = async (req: Request, res: Response): Promise<Respon
     return res.status(500).json({ message: "Internal server error" });
   }
 };
+
+export {
+  createUserController
+};

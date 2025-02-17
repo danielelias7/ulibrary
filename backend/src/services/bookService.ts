@@ -1,6 +1,12 @@
 import Book, { IBook } from '../models/Book';
 
 export const addBook = async (title: string, author: string, publishedYear: number, genre: string, stock: number): Promise<IBook> => {
+
+  const existingBook = await Book.findOne({ title });
+  if (existingBook) {
+    throw new Error("Book with the same title already exists");
+  }
+
   const newBook = new Book({
     title,
     author,

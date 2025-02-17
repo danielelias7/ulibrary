@@ -8,6 +8,9 @@ const AddNew = async (req: Request, res: Response): Promise<Response> => {
     return res.json(book);
   } catch (error: any) {
     console.error(error);
+    if (error.message === "Book with the same title already exists") {
+      return res.status(400).json({ message: error.message });
+    }
     return res.status(500).json({ message: "Internal server error" });
   }
 };
@@ -35,32 +38,8 @@ const getById = async (req: Request, res: Response): Promise<Response> => {
   }
 };
 
-const checkoutBook = async (req: Request, res: Response): Promise<Response> => {
-  try {
-    const { id } = req.params;
-    const updatedBook = await updateBookStock(id, -1);
-    return res.json(updatedBook);
-  } catch (error: any) {
-    console.error(error);
-    return res.status(500).json({ message: "Internal server error" });
-  }
-};
-
-const returnBook = async (req: Request, res: Response): Promise<Response> => {
-  try {
-    const { id } = req.params;
-    const updatedBook = await updateBookStock(id, 1);
-    return res.json(updatedBook);
-  } catch (error: any) {
-    console.error(error);
-    return res.status(500).json({ message: "Internal server error" });
-  }
-};
-
 export {
   AddNew,
   getAll,
-  getById,
-  checkoutBook,
-  returnBook
+  getById
 };
